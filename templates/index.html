@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>ECE 4180 ROBOT</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript">
+		function Button_onclick(direction) {
+			$.ajax({ url: '/' + direction });
+		}
+
+		function SendText_onclick(){
+			var text = document.getElementById("textBox").value;
+			$.ajax({
+  				type : 'POST',
+  				url : "{{url_for('speak_text')}}",
+  				data : {'data':text}
+			});
+		}
+	</script>  
+  </head>
+	<body>
+		<h1>ECE 4180 ROBOT</h1>
+		<img src="{{ url_for('video_feed') }}">
+		<table>
+			<tr>
+				<td colspan="2" style="text-align: center">
+					Bot
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input id="btnFwd" type="button" value="Fwd" onclick="Button_onclick('forward')" />
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center">
+					<input id="btnMLeft" type="button" value="Left" onclick="Button_onclick('left')" />
+				</td>
+				<td style="text-align: center">
+					<input id="btnMRight" type="button" value="Right" onclick="Button_onclick('right')" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center">
+					<input id="btnRev" type="button" value="Rev" onclick="Button_onclick('reverse')" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" style="text-align: center">
+						<input id="textBox" name = "message" type="text" value="What Should I say?"/>
+						<input type="submit" name="Speak" value="Speak" onclick="SendText_onclick()">					
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
